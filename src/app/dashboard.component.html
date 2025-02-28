@@ -1,0 +1,29 @@
+<!-- dashboard.component.html -->
+<mat-grid-list cols="4" rowHeight="100px" gutterSize="16px">
+  
+  <!-- Quick Stats Section -->
+  <mat-grid-tile colspan="4">
+    <app-quick-stats [metrics]="metrics"></app-quick-stats>
+  </mat-grid-tile>
+
+  <!-- Main Content -->
+  <mat-grid-tile colspan="3">
+    <mat-card class="booking-calendar">
+      <app-booking-calendar [bookings]="bookings"></app-booking-calendar>
+    </mat-card>
+  </mat-grid-tile>
+
+  <!-- Sidebar -->
+  <mat-grid-tile colspan="1">
+    <mat-card class="occupancy-chart">
+      <app-occupancy-chart [data]="occupancyData"></app-occupancy-chart>
+    </mat-card>
+    
+    <mat-card class="quick-actions">
+      <button mat-flat-button color="primary" (click)="newBooking()">
+        <mat-icon>add</mat-icon> New Booking
+      </button>
+    </mat-card>
+  </mat-grid-tile>
+
+</mat-grid-list>
