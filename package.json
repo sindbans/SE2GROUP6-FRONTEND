@@ -42,4 +42,13 @@
     "karma-jasmine-html-reporter": "~2.1.0",
     "typescript": "~5.7.2"
   }
+  "overrides": {
+  "@swimlane/ngx-charts": {
+    "@angular/core": "19.2.0",
+    "@angular/common": "19.2.0",
+    "@angular/animations": "19.2.0",
+    "@angular/cdk": "19.2.1"
+  }
+}
+
 }
