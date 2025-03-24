@@ -1,0 +1,130 @@
+/* Register Page Styling */
+.register-container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    height: 100vh;
+    background: #0a2472;
+    position: relative;
+    overflow: hidden;
+}
+
+.register-container h1 {
+    font-size: 32px;
+    color: white;
+    margin-bottom: 10px;
+}
+
+.register-container p {
+    color: white;
+    font-size: 14px;
+    margin-bottom: 20px;
+}
+
+/* Register Form */
+.register-form {
+    background: transparent;
+    padding: 30px;
+    border-radius: 8px;
+    width: 350px;
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
+}
+.register-form input {
+    width: 100%;
+    padding: 12px;
+    font-size: 16px;
+    border: 2px solid white;
+    background: white; /* White background */
+    color: black; /* Black text for readability */
+    border-radius: 6px;
+    outline: none;
+    transition: border-color 0.3s ease;
+}
+
+.register-form input:focus {
+    border-color: #66b3ff;
+}
+
+.register-form input::placeholder {
+    color: gray;
+    opacity: 0.8;
+}
+
+/* Register Button */
+.register-btn {
+    padding: 12px;
+    background-color: #1db954;
+    border: none;
+    color: white;
+    font-size: 16px;
+    border-radius: 6px;
+    cursor: pointer;
+    width: 100%;
+    text-align: center;
+    transition: 0.3s;
+    margin-left: 10px;
+}
+
+.register-btn:hover {
+    background-color: #1aa34a;
+}
+
+/* Google Sign-up Button */
+.google-register-btn {
+    margin-top: 15px;
+    padding: 12px;
+    background-color: rgb(241, 53, 53);
+    color: rgb(243, 241, 241);
+    border-radius: 6px;
+    cursor: pointer;
+    
+    font-size: 16px;
+    font-weight: bold;
+    text-align: center;
+    border: none;
+    transition: 0.3s;
+}
+
+.google-register-btn:hover {
+    background-color: #f78776;
+}
+
+/* Already have an account Link */
+.login-link {
+    color: #66b3ff;
+    text-decoration: none;
+    font-size: 14px;
+    margin-top: 10px;
+}
+
+.login-link:hover {
+    text-decoration: underline;
+}
+
+/* Static Background Design */
+.register-container::before {
+    content: "";
+    position: absolute;
+    width: 400px;
+    height: 400px;
+    background: rgba(255, 255, 255, 0.1);
+    border-radius: 50%;
+    top: 10%;
+    left: -10%;
+    pointer-events: none;
+}
+
+.register-container::after {
+    content: "";
+    position: absolute;
+    width: 300px;
+    height: 300px;
+    background: rgba(255, 255, 255, 0.1);
+    border-radius: 50%;
+    bottom: 5%;
+    right: -5%;
+    pointer-events: none;
+}

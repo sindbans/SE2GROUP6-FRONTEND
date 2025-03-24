@@ -1,0 +1,125 @@
+/* Login Page Styling */
+.login-container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    height: 100vh;
+    background: #0a2472;
+    position: relative;
+    overflow: hidden;
+}
+
+.login-container h1 {
+    font-size: 32px;
+    color: white;
+    margin-bottom: 10px;
+}
+
+.login-container p {
+    color: white;
+    font-size: 14px;
+    margin-bottom: 20px;
+}
+
+/* Login Form */
+.login-form {
+      padding: 30px;
+    border-radius: 8px;
+    width: 350px;
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
+}
+
+.login-form input {
+    width: 100%;
+    padding: 12px;
+    font-size: 16px;
+    border: 2px solid white;
+ 
+    color: white;
+    border-radius: 6px;
+    outline: none;
+}
+
+.login-form input::placeholder {
+    
+   
+}
+
+/* Login Button */
+.login-btn {
+    padding: 12px;
+    background-color: #1db954;
+    border: none;
+    color: white;
+    font-size: 16px;
+    border-radius: 6px;
+    cursor: pointer;
+    width: 100%;
+    text-align: center;
+    transition: 0.3s;
+    margin-left: 10px;
+}
+
+.login-btn:hover {
+    background-color: #1aa34a;
+}
+
+.google-login-btn {
+    margin-top: 15px;
+    padding: 12px;
+    background-color: rgb(241, 53, 53);
+    color: rgb(243, 241, 241);
+    border-radius: 6px;
+    cursor: pointer;
+    
+    font-size: 16px;
+    font-weight: bold;
+    text-align: center;
+    border: none;
+    transition: 0.3s;
+}
+
+.google-login-btn:hover {
+    background-color: #f78776;
+}
+
+
+/* Already have an account Link */
+.register-link {
+    color: #66b3ff;
+    text-decoration: none;
+    font-size: 14px;
+    margin-top: 10px;
+}
+
+.register-link:hover {
+    text-decoration: underline;
+}
+
+/* Static Background Design */
+.login-container::before {
+    content: "";
+    position: absolute;
+    width: 400px;
+    height: 400px;
+    background: rgba(255, 255, 255, 0.1);
+    border-radius: 50%;
+    top: 10%;
+    left: -10%;
+    pointer-events: none;
+}
+
+.login-container::after {
+    content: "";
+    position: absolute;
+    width: 300px;
+    height: 300px;
+    background: rgba(255, 255, 255, 0.1);
+    border-radius: 50%;
+    bottom: 5%;
+    right: -5%;
+    pointer-events: none;
+}
