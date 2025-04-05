@@ -1,0 +1,154 @@
+/* src/pages/EventDetailsPage.css */
+.event-details-page {
+  background: #f8f9fa;
+  min-height: 100vh;
+}
+
+.event-hero {
+  height: 60vh;
+  background-size: cover;
+  background-position: center;
+  position: relative;
+}
+
+.hero-overlay {
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: rgba(0,0,0,0.6);
+  display: flex;
+  align-items: flex-end;
+  padding: 40px;
+}
+
+.event-title {
+  color: white;
+  font-size: 48px;
+  margin: 0;
+  text-shadow: 2px 2px 4px rgba(0,0,0,0.5);
+}
+
+.event-content {
+  max-width: 1200px;
+  margin: -80px auto 0;
+  padding: 40px;
+  background: white;
+  border-radius: 8px;
+  box-shadow: 0 4px 20px rgba(0,0,0,0.1);
+  position: relative;
+}
+
+.event-meta-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+  gap: 30px;
+  margin: 40px 0;
+  padding: 30px;
+  background: #f8f9fa;
+  border-radius: 8px;
+}
+
+.meta-item {
+  display: flex;
+  flex-direction: column;
+}
+
+.meta-label {
+  font-size: 14px;
+  color: #666;
+  margin-bottom: 8px;
+}
+
+.meta-value {
+  font-size: 16px;
+  color: #333;
+  font-weight: 500;
+}
+
+.details-section {
+  margin: 40px 0;
+  padding: 30px 0;
+  border-top: 1px solid #eee;
+}
+
+.details-section h2 {
+  font-size: 24px;
+  color: #1a1a1a;
+  margin-bottom: 20px;
+}
+
+.detail-item {
+  margin-bottom: 20px;
+  display: flex;
+  gap: 15px;
+  align-items: baseline;
+}
+
+.detail-item > span:first-child {
+  min-width: 100px;
+  color: #666;
+  font-weight: 500;
+}
+
+.artist-tag,
+.sponsor-tag,
+.cast-tag {
+  background: #fff;
+  border: 1px solid #eee;
+  padding: 8px 16px;
+  border-radius: 20px;
+  margin: 5px;
+  display: inline-block;
+  font-size: 14px;
+}
+
+.booking-cta {
+  position: sticky;
+  bottom: 0;
+  background: white;
+  padding: 20px;
+  box-shadow: 0 -4px 20px rgba(0,0,0,0.05);
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.price-section {
+  display: flex;
+  flex-direction: column;
+}
+
+.price-label {
+  font-size: 14px;
+  color: #666;
+}
+
+.price {
+  font-size: 36px;
+  color: #e51937;
+  font-weight: 700;
+}
+
+.book-button {
+  background: #e51937;
+  color: white;
+  border: none;
+  padding: 15px 50px;
+  border-radius: 4px;
+  font-size: 18px;
+  cursor: pointer;
+  transition: background 0.3s ease;
+}
+
+.book-button:hover {
+  background: #c2162e;
+}
+
+.loading {
+  text-align: center;
+  padding: 100px 0;
+  font-size: 20px;
+  color: #666;
+}
