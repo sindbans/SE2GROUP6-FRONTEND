@@ -1,0 +1,54 @@
+/* src/styles/theme.css */
+
+.btn-primary {
+    @apply bg-gold text-black px-6 py-2 rounded-full font-semibold shadow hover:bg-yellow-400 transition-all;
+}
+
+.btn-secondary {
+    @apply bg-white text-midnight px-5 py-2 rounded border border-midnight hover:bg-sky-100;
+}
+
+.title-xl {
+    @apply font-cinzel text-4xl text-gold mb-2;
+}
+
+.title-md {
+    @apply font-cinzel text-2xl text-cloud;
+}
+
+.text-gold {
+    @apply text-gold;
+}
+
+.bg-hero {
+    @apply bg-[url('/assets/images/parallax-bg.jpg')] bg-cover bg-center;
+}
+
+.btn-primary {
+    background-color: var(--gold);
+    color: black;
+    padding: 0.5rem 1.5rem;
+    border-radius: 9999px;
+    font-weight: 600;
+    transition: all 0.3s ease-in-out;
+}
+.btn-primary:hover {
+    background-color: #ffd700;
+}
+
+.btn-secondary {
+    background-color: white;
+    color: var(--midnight);
+    padding: 0.4rem 1rem;
+    border: 1px solid var(--midnight);
+    border-radius: 0.5rem;
+}
+
+.title-xl {
+    font-family: 'Cinzel', serif;
+    font-size: 2.5rem;
+    color: var(--gold);
+    text-align: center;
+    margin-bottom: 1rem;
+}
+
