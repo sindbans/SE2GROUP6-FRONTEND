@@ -1,3 +1,4 @@
+// src/components/layout/GoogleAd.jsx
 import { useEffect } from "react";
 
 const GoogleAd = ({ slot }) => {
@@ -12,12 +13,14 @@ const GoogleAd = ({ slot }) => {
     }, []);
 
     return (
-        <ins className="adsbygoogle"
-             style={{ display: "block" }}
-             data-ad-client="ca-pub-XXXXXXXXXXXXXXXX"
-             data-ad-slot={slot}
-             data-ad-format="auto"
-             data-full-width-responsive="true"></ins>
+        <ins
+            className="adsbygoogle"
+            style={{ display: "block" }}
+            data-ad-client="ca-pub-XXXXXXXXXXXXXXXX"
+            data-ad-slot={slot}
+            data-ad-format="auto"
+            data-full-width-responsive="true"
+        ></ins>
     );
 };
 

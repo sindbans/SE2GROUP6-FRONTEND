@@ -1,11 +1,20 @@
+// src/components/ui/ParallaxSection.jsx
+import React from "react";
 import { Parallax } from "react-parallax";
+import { Container } from "react-bootstrap";
 
-const ParallaxSection = ({ image, children }) => (
-    <Parallax bgImage={image} strength={500}>
-        <div className="h-[500px] flex items-center justify-center text-white text-4xl font-bold">
-            {children}
-        </div>
-    </Parallax>
-);
+const ParallaxSection = ({ image, children }) => {
+    return (
+        <Parallax bgImage={image} strength={500}>
+            <div style={{ height: "400px" }}>
+                <Container className="d-flex justify-content-center align-items-center h-100">
+                    <div className="text-center text-white">
+                        {children}
+                    </div>
+                </Container>
+            </div>
+        </Parallax>
+    );
+};
 
 export default ParallaxSection;

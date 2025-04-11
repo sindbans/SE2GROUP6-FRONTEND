@@ -1,28 +1,32 @@
-import Navbar from "../components/layout/Navbar";
+// src/pages/Home.jsx
+import React from "react";
+import { Container, Button } from "react-bootstrap";
 import PosterCarousel from "../components/ui/PosterCarousel";
 import ParallaxSection from "../components/ui/ParallaxSection";
 import GoogleAd from "../components/layout/GoogleAd";
-import Footer from "../components/layout/Footer";
 import Title from "../components/common/Title";
-import Button from "../components/common/Button";
 import Divider from "../components/common/Divider";
-import "../styles/globals.css";
+// No Navbar or Footer imports now!
 
-const Home = () => (
-    <>
-        <Navbar />
-        <ParallaxSection image="/assets/images/parallax-bg.jpg">
-            <Title>Welcome to HermesPass</Title>
-            <Button>Explore Events</Button>
-        </ParallaxSection>
-        <Divider />
-        <PosterCarousel />
-        <div className="my-10 mx-auto w-11/12">
-            <GoogleAd slot="1234567890" />
-        </div>
-        <Footer />
-    </>
-);
+const Home = () => {
+    return (
+        <>
+            <ParallaxSection image="/assets/images/parallax-bg.jpg">
+                <Title>Welcome to HermesPass</Title>
+                <Button variant="primary">Explore Events</Button>
+            </ParallaxSection>
 
+            <Divider />
+
+            <Container className="my-4">
+                <PosterCarousel />
+            </Container>
+
+            <Container className="my-4">
+                <GoogleAd slot="1234567890" />
+            </Container>
+        </>
+    );
+};
 
 export default Home;

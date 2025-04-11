@@ -1,7 +1,9 @@
-import { useEffect, useState } from "react";
+// src/components/layout/Navbar.jsx
+import React, { useEffect, useState } from "react";
+import { Navbar as RBNavbar, Nav, Container } from "react-bootstrap";
 import axios from "axios";
 
-const Navbar = () => {
+export default function Navbar() {
     const [location, setLocation] = useState(localStorage.getItem("userLocationName") || "");
     const [showModal, setShowModal] = useState(false);
     const [manualInput, setManualInput] = useState("");
@@ -17,7 +19,8 @@ const Navbar = () => {
                     localStorage.setItem("userLocationName", "Using GPS");
                 },
                 () => {
-                    setShowModal(true); // Permission denied
+                    // Permission denied => show modal
+                    setShowModal(true);
                 }
             );
         }
@@ -26,12 +29,10 @@ const Navbar = () => {
     const handleInputChange = async (e) => {
         const query = e.target.value;
         setManualInput(query);
-
         if (query.length < 3) {
             setSuggestions([]);
             return;
         }
-
         try {
             const res = await axios.get("https://nominatim.openstreetmap.org/search", {
                 params: {
@@ -50,7 +51,6 @@ const Navbar = () => {
     const handleSelect = (item) => {
         const coords = `${item.lat},${item.lon}`;
         const name = item.display_name;
-
         localStorage.setItem("userLocationCoords", coords);
         localStorage.setItem("userLocationName", name);
         setLocation(name);
@@ -59,37 +59,63 @@ const Navbar = () => {
 
     return (
         <>
-            <nav className="bg-black text-white p-4 flex justify-between">
-                <h1 className="text-2xl font-bold">HermesPass</h1>
-                <p className="text-sm italic">📍 {location || "Detecting..."}</p>
-            </nav>
+            <RBNavbar bg="dark" variant="dark" expand="md">
+                <Container>
+                    <RBNavbar.Brand href="#">
+                        <img
+                            src="/assets/icons/hermes-wing.png"
+                            alt="Hermes Wing Logo"
+                            width="30"
+                            height="30"
+                            className="d-inline-block align-top me-2"
+                        />
+                        HermesPass
+                    </RBNavbar.Brand>
+                    <RBNavbar.Toggle aria-controls="basic-navbar-nav" />
+                    <RBNavbar.Collapse id="basic-navbar-nav">
+                        <Nav className="me-auto">
+                            <Nav.Link href="#">Home</Nav.Link>
+                            <Nav.Link href="#">Events</Nav.Link>
+                            <Nav.Link href="#">About</Nav.Link>
+                            <Nav.Link href="#">Contact</Nav.Link>
+                        </Nav>
+                        <span className="text-light small">
+              📍 {location || "Detecting..."}
+            </span>
+                    </RBNavbar.Collapse>
+                </Container>
+            </RBNavbar>
 
+            {/* Modal for location input */}
             {showModal && (
-                <div className="fixed inset-0 bg-black bg-opacity-60 flex items-center justify-center z-50">
-                    <div className="bg-white p-6 rounded-xl w-96">
-                        <h2 className="text-xl font-bold mb-3">Where are you located?</h2>
+                <div
+                    className="position-fixed top-0 start-0 w-100 h-100 bg-dark bg-opacity-75 d-flex align-items-center justify-content-center"
+                    style={{ zIndex: 9999 }}
+                >
+                    <div className="bg-white p-4 rounded" style={{ width: "400px" }}>
+                        <h2 className="mb-3">Where are you located?</h2>
                         <input
                             type="text"
                             placeholder="Enter city or location"
-                            className="w-full border border-gray-300 rounded p-2 mb-2"
+                            className="form-control mb-2"
                             value={manualInput}
                             onChange={handleInputChange}
                         />
-                        <ul className="max-h-40 overflow-y-auto">
+                        <ul className="list-group mb-3">
                             {suggestions.map((item, idx) => (
                                 <li
                                     key={idx}
-                                    className="p-2 hover:bg-gray-200 cursor-pointer text-sm"
+                                    className="list-group-item list-group-item-action"
                                     onClick={() => handleSelect(item)}
                                 >
                                     {item.display_name}
                                 </li>
                             ))}
                         </ul>
-                        <div className="mt-4 text-right">
+                        <div className="text-end">
                             <button
                                 onClick={() => setShowModal(false)}
-                                className="bg-gray-300 px-4 py-2 rounded hover:bg-gray-400"
+                                className="btn btn-secondary"
                             >
                                 Cancel
                             </button>
@@ -99,6 +125,4 @@ const Navbar = () => {
             )}
         </>
     );
-};
-
-export default Navbar;
+}

@@ -1,5 +1,3 @@
-// vite.config.ts
-
 import { defineConfig } from 'vite';
 import react from '@vitejs/plugin-react';
 import path from 'path';
@@ -13,10 +11,15 @@ export default defineConfig({
             '@pages': path.resolve(__dirname, './src/pages'),
             '@utils': path.resolve(__dirname, './src/utils'),
             '@styles': path.resolve(__dirname, './src/styles'),
-        }
+        },
     },
     server: {
         port: 5173,
-        open: true
+        open: true,
+        historyApiFallback: true,
+    },
+    esbuild: {
+        jsx: 'automatic',        // ✅ Prevents React typing errors
+        jsxImportSource: 'react',
     }
 });

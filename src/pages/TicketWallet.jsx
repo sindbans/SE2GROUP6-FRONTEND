@@ -1,10 +1,9 @@
 // src/pages/TicketWallet.jsx
-
 import React, { useEffect, useState } from "react";
+import { Container, Spinner, Row, Col, Button } from "react-bootstrap";
 import api from "../utils/api";
 import Title from "../components/common/Title";
 import Divider from "../components/common/Divider";
-import Footer from "../components/layout/Footer";
 
 const TicketWallet = () => {
     const [tickets, setTickets] = useState([]);
@@ -13,7 +12,7 @@ const TicketWallet = () => {
     useEffect(() => {
         const fetchTickets = async () => {
             try {
-                const res = await api.get("/tickets/user"); // Replace with actual API
+                const res = await api.get("/tickets/user"); // Replace with your real endpoint
                 setTickets(res.data || []);
             } catch (err) {
                 console.error("Error loading tickets:", err);
@@ -25,34 +24,35 @@ const TicketWallet = () => {
     }, []);
 
     return (
-        <div className="min-h-screen bg-midnight text-cloud p-6">
+        <Container className="py-5">
             <Title>Your Ticket Wallet</Title>
             <Divider />
+
             {loading ? (
-                <p className="text-center text-sm">Loading tickets...</p>
-            ) : tickets.length === 0 ? (
-                <p className="text-center italic text-sm text-sky-300">No tickets yet</p>
-            ) : (
-                <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
-                    {tickets.map((ticket, i) => (
-                        <div
-                            key={i}
-                            className="bg-cloud text-midnight rounded-xl p-4 shadow hover:shadow-lg transition duration-300"
-                        >
-                            <h3 className="text-lg font-bold">{ticket.eventName}</h3>
-                            <p className="text-sm">Date: {new Date(ticket.eventDate).toDateString()}</p>
-                            <p className="text-sm">Tier: {ticket.seatTier}</p>
-                            <p className="text-sm">Seat: {ticket.seatNumber || "General Admission"}</p>
-                            <p className="text-sm">Price: ₹{ticket.price}</p>
-                            <div className="mt-3 text-right">
-                                <button className="btn-secondary">Download</button>
-                            </div>
-                        </div>
-                    ))}
+                <div className="text-center my-4">
+                    <Spinner animation="border" />
                 </div>
+            ) : tickets.length === 0 ? (
+                <p className="text-center text-muted">No tickets yet</p>
+            ) : (
+                <Row>
+                    {tickets.map((ticket, i) => (
+                        <Col xs={12} md={6} lg={4} className="mb-4" key={i}>
+                            <div className="border rounded p-3 shadow-sm">
+                                <h4>{ticket.eventName}</h4>
+                                <p>Date: {new Date(ticket.eventDate).toDateString()}</p>
+                                <p>Tier: {ticket.seatTier}</p>
+                                <p>Seat: {ticket.seatNumber || "General Admission"}</p>
+                                <p>Price: ₹{ticket.price}</p>
+                                <div className="text-end mt-3">
+                                    <Button variant="outline-primary">Download</Button>
+                                </div>
+                            </div>
+                        </Col>
+                    ))}
+                </Row>
             )}
-            <Footer />
-        </div>
+        </Container>
     );
 };
 
