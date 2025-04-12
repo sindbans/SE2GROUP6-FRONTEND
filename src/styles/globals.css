@@ -7,3 +7,13 @@ body {
     background-color: var(--midnight);
     color: var(--cloud);
 }
+.nav-animated-text {
+    color: #ffffff !important;
+    transition: color 0.3s ease, transform 0.3s ease;
+}
+
+/* On hover: turn gold + scale up a bit */
+.nav-animated-text:hover {
+    color: gold !important;
+    transform: scale(1.08);
+}
