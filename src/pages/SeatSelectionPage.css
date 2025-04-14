@@ -1,0 +1,83 @@
+.seat-selection-container {
+  padding: 20px;
+  text-align: center;
+}
+
+.screen {
+  background: linear-gradient(to right, #8ecae6, #219ebc);
+  border-radius: 25px;
+  margin: 40px auto 20px;
+  width: 60%;
+  padding: 12px;
+  font-weight: bold;
+  font-size: 1.2rem;
+  color: white;
+  box-shadow: 0 0 10px #8ecae6;
+  letter-spacing: 1px;
+}
+
+.seat-map {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  align-items: center;
+  margin-top: 30px;
+}
+
+.seat-row {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.low-price-row {
+  margin-bottom: 20px;
+  border-bottom: 1px dashed #aaa;
+  padding-bottom: 10px;
+}
+
+.row-label {
+  width: 20px;
+  font-weight: bold;
+}
+
+.seat-block {
+  display: flex;
+  gap: 6px;
+}
+
+.seat {
+  width: 30px;
+  height: 30px;
+  background-color: #d1d1d1;
+  border-radius: 6px;
+  text-align: center;
+  line-height: 30px;
+  font-size: 0.8rem;
+  cursor: pointer;
+  transition: background-color 0.3s;
+}
+
+.seat.selected {
+  background-color: #fb8500;
+  color: white;
+}
+
+.block-gap {
+  width: 40px;
+}
+
+.summary {
+  margin-top: 20px;
+}
+
+.pay-btn {
+  margin-top: 10px;
+  padding: 10px 25px;
+  background-color: #023047;
+  color: white;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+}
+

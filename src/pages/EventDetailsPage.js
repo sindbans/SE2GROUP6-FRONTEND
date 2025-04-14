@@ -1,14 +1,13 @@
 import React, { useState, useEffect } from 'react';
-import { useParams } from 'react-router-dom';
-import BookingModal from '../components/BookingModal';
+import { useParams, useNavigate } from 'react-router-dom';
 import './EventDetailsPage.css';
 
 const EventDetailsPage = () => {
   const { eventId } = useParams();
+  const navigate = useNavigate();
   const [event, setEvent] = useState(null);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
-  const [showModal, setShowModal] = useState(false);
 
   const transformEventDetails = (backendDetails) => {
     let type = "other";
@@ -45,9 +44,7 @@ const EventDetailsPage = () => {
   useEffect(() => {
     fetch(`http://localhost:3000/api/events/${eventId}`)
       .then((res) => {
-        if (!res.ok) {
-          throw new Error("Failed to fetch event details");
-        }
+        if (!res.ok) throw new Error("Failed to fetch event details");
         return res.json();
       })
       .then((data) => {
@@ -63,6 +60,15 @@ const EventDetailsPage = () => {
         setLoading(false);
       });
   }, [eventId]);
+
+  const handleBookNow = () => {
+    if (event) {
+      navigate(event.type === 'concert' ? '/select-seats-concert' : '/select-seats', {
+        state: { event }
+      });
+      
+    }
+  };
 
   if (loading) return <div className="loading">Loading...</div>;
   if (error) return <div>Error: {error}</div>;
@@ -152,16 +158,15 @@ const EventDetailsPage = () => {
           </div>
           <button
             className="book-button"
-            onClick={() => setShowModal(true)}
+            onClick={handleBookNow}
           >
             Book Tickets
           </button>
         </div>
       </div>
-
-      {showModal && <BookingModal event={event} onClose={() => setShowModal(false)} />}
     </div>
   );
 };
 
 export default EventDetailsPage;
+

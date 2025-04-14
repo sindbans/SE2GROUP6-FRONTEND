@@ -1,0 +1,104 @@
+.concert-seat-container {
+  padding: 20px;
+  text-align: center;
+}
+
+.stage {
+  background: linear-gradient(to right, #e63946, #f1faee);
+  border-radius: 25px;
+  margin: 40px auto 20px;
+  width: 60%;
+  padding: 12px;
+  font-weight: bold;
+  font-size: 1.2rem;
+  color: #1d3557;
+  box-shadow: 0 0 10px rgba(230, 57, 70, 0.6);
+}
+
+.concert-seat-map {
+  display: flex;
+  flex-direction: column;
+  gap: 30px;
+  align-items: center;
+  margin-top: 30px;
+}
+
+.zone-label {
+  margin-bottom: 10px;
+  font-size: 1.1rem;
+  font-weight: bold;
+}
+
+.zone-label.platinum {
+  color: #c0c0c0;
+}
+
+.zone-label.gold {
+  color: #daa520;
+}
+
+.zone-label.silver {
+  color: #c0c0c0;
+}
+
+.concert-seat-row {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.row-label {
+  width: 20px;
+  font-weight: bold;
+}
+
+.concert-seat-block {
+  display: flex;
+  gap: 8px;
+  flex-wrap: wrap;
+  justify-content: center;
+}
+
+.concert-seat {
+  width: 32px;
+  height: 32px;
+  border-radius: 6px;
+  line-height: 32px;
+  font-size: 0.75rem;
+  cursor: pointer;
+  background-color: #ddd;
+  transition: background-color 0.3s;
+}
+
+.concert-seat.selected {
+  border: 2px solid #222;
+  font-weight: bold;
+  color: white;
+}
+
+.concert-seat.platinum {
+  background-color: #c0c0c0;
+}
+
+.concert-seat.gold {
+  background-color: #ffd700;
+}
+
+.concert-seat.silver {
+  background-color: #b0c4de;
+}
+
+.pay-btn {
+  margin-top: 20px;
+  padding: 10px 25px;
+  background-color: #1d3557;
+  color: white;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+}
+
+.concert-summary {
+  margin-top: 30px;
+}
+
