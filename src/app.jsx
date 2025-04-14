@@ -5,6 +5,8 @@ import { AnimatePresence } from "framer-motion";
 import Home from "./pages/Home";
 import TicketWallet from "./pages/TicketWallet";
 import ParallaxTesting from "./pages/playground/ParallaxTesting"; // adjust path as needed
+import Register from "./pages/Register";
+import Login from "./pages/Login";
 // Import the new Layout
 import Layout from "./components/layout/Layout";
 
@@ -36,6 +38,22 @@ const App = () => {
                     element={
                         <Layout>
                             <ParallaxTesting />
+                        </Layout>
+                    }
+                />
+                <Route
+                    path="/auth/register"
+                    element={
+                        <Layout>
+                            <Register />
+                        </Layout>
+                    }
+                />
+                <Route
+                    path="/auth/login"
+                    element={
+                        <Layout>
+                            <Login />
                         </Layout>
                     }
                 />

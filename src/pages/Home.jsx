@@ -6,6 +6,7 @@ import ParallaxSection from "../components/ui/ParallaxSection";
 import GoogleAd from "../components/layout/GoogleAd";
 import Title from "../components/common/Title";
 import Divider from "../components/common/Divider";
+import SearchBarWithDropdown from "@components/common/SearchBarWithDropDown";
 // No Navbar or Footer imports now!
 
 const Home = () => {
@@ -17,6 +18,7 @@ const Home = () => {
             </ParallaxSection>
 
             <Divider />
+            <SearchBarWithDropdown />
 
             <Container className="my-4">
                 <PosterCarousel />
