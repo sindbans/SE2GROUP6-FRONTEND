@@ -16,23 +16,11 @@ export default function SearchBarWithDropdown({ defaultType = "all" }) {
 
     const searchTypes = ["all", "movies", "concerts", "theatre", "other"];
 
-    const handleSearch = async (e) => {
-        e.preventDefault(); // prevent page refresh
+    const handleSearch = (e) => {
+        e.preventDefault();
         if (!searchTerm.trim()) return;
-        setLoading(true);
-        try {
-            const response = await fetch(
-                `/api/search?type=${searchType}&query=${encodeURIComponent(searchTerm)}&uid=guest`
-            );
-            const data = await response.json();
-            setResults(data || []);
-        } catch (err) {
-            console.error("Search failed", err);
-            setResults([]);
-        }
-        setLoading(false);
+        navigate(`/search-results?type=${searchType}&query=${encodeURIComponent(searchTerm)}`);
     };
-
     const handleKeyDown = (e) => {
         if (e.key === "Enter") handleSearch(e);
     };

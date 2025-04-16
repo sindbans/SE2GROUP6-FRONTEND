@@ -9,6 +9,7 @@ import Register from "./pages/Register";
 import Login from "./pages/Login";
 // Import the new Layout
 import Layout from "./components/layout/Layout";
+import SearchResultsPage from "./pages/SearchResultsPage";
 
 const App = () => {
     const location = useLocation();
@@ -54,6 +55,14 @@ const App = () => {
                     element={
                         <Layout>
                             <Login />
+                        </Layout>
+                    }
+                />
+                <Route
+                    path="/search-results"
+                    element={
+                        <Layout>
+                            <SearchResultsPage />
                         </Layout>
                     }
                 />
