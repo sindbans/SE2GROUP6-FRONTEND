@@ -7,6 +7,7 @@ import TicketWallet from "./pages/TicketWallet";
 import ParallaxTesting from "./pages/playground/ParallaxTesting"; // adjust path as needed
 import Register from "./pages/Register";
 import Login from "./pages/Login";
+import EventPage from "./pages/EventPage";
 // Import the new Layout
 import Layout from "./components/layout/Layout";
 import SearchResultsPage from "./pages/SearchResultsPage";
@@ -66,6 +67,9 @@ const App = () => {
                         </Layout>
                     }
                 />
+
+                    {/* existing routes */}
+                <Route path="/event/:eventId" element={<Layout><EventPage /></Layout>} />
                 {/* Add more routes as needed, always wrapped in <Layout> */}
             </Routes>
         </AnimatePresence>

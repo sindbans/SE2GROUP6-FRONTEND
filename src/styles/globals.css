@@ -44,4 +44,12 @@ body {
     text-shadow: 0 0 6px rgba(0, 0, 0, 0.6);
     pointer-events: none; /* clicks pass through */
 }
+/* optional pulse when button is in view */
+.book-btn {
+    animation: float 6s ease-in-out infinite;
+}
+@keyframes float {
+    0%, 100% { transform: translateY(0); }
+    50%      { transform: translateY(-4px); }
+}
 

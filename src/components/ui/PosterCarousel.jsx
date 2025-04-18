@@ -1,5 +1,6 @@
 // PosterCarousel.jsx
 import React, { useEffect, useState } from "react";
+import {useNavigate} from "react-router-dom";
 import Slider from "react-slick";
 import axios from "axios";
 import "slick-carousel/slick/slick.css";
@@ -10,7 +11,7 @@ const API = "http://localhost:3000";
 
 export default function PosterCarousel({ eventType, title }) {
     const [events, setEvents] = useState([]);
-
+    const navigate = useNavigate();
     useEffect(() => {
         axios
             .get(`${API}/api/events`)
@@ -53,7 +54,12 @@ export default function PosterCarousel({ eventType, title }) {
 
             <Slider {...settings}>
                 {events.map((ev) => (
-                    <div key={ev.eventId} className="px-2">
+                        <div
+                            key={ev.eventId}
+                            className="px-2"
+                            style={{cursor: "pointer"}}
+                            onClick={() => navigate(`/event/${ev.eventId}`)}
+                            >
                         <img
                             src={ev.posterImage || DEFAULT_IMG}
                             alt={ev.name}
