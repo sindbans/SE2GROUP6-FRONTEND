@@ -1,58 +1,75 @@
-// src/components/ui/PosterCarousel.jsx
+// PosterCarousel.jsx
 import React, { useEffect, useState } from "react";
 import Slider from "react-slick";
 import axios from "axios";
 import "slick-carousel/slick/slick.css";
 import "slick-carousel/slick/slick-theme.css";
 
-const PosterCarousel = () => {
-    const [posters, setPosters] = useState([]);
+const DEFAULT_IMG = "/assets/images/no-poster.png";
+const API = "http://localhost:3000";
+
+export default function PosterCarousel({ eventType, title }) {
+    const [events, setEvents] = useState([]);
 
     useEffect(() => {
-        axios.get("/api/events")
-            .then(res => {
-                const events = res.data?.events || [];
-                setPosters(events);
+        axios
+            .get(`${API}/api/events`)
+            .then((res) => {
+                const all = res.data?.events || [];
+                setEvents(all.filter((e) => e.type === eventType));
             })
-            .catch(err => {
-                console.error(err);
-                setPosters([]);
-            });
-    }, []);
+            .catch(() => setEvents([]));
+    }, [eventType]);
+
+    if (!events.length) return null;
 
     const settings = {
-        dots: true,
+        dots: false,
         infinite: true,
-        speed: 500,
-        slidesToShow: 3,
+        speed: 400,
+        slidesToShow: 4,
         slidesToScroll: 1,
-        autoplay: true
+        autoplay: true,
+        responsive: [
+            { breakpoint: 992, settings: { slidesToShow: 3 } },
+            { breakpoint: 768, settings: { slidesToShow: 2 } },
+            { breakpoint: 576, settings: { slidesToShow: 1 } },
+        ],
     };
 
-    if (!posters.length) {
-        return (
-            <p className="text-muted">
-                No events to display
-            </p>
-        );
-    }
-
     return (
-        <div className="my-3">
+        <section className="mb-5">
+            {/* carousel heading in brand cloud‑white */}
+            <h3
+                className="mb-3"
+                style={{
+                    color: "var(--cloud)",
+                    fontFamily: "'Cinzel', serif",
+                    fontWeight: 600,
+                }}
+            >
+                {title}
+            </h3>
+
             <Slider {...settings}>
-                {posters.map((poster) => (
-                    <div key={poster.eventId} className="px-2">
+                {events.map((ev) => (
+                    <div key={ev.eventId} className="px-2">
                         <img
-                            src={poster.posterImage}
-                            alt={poster.name}
-                            className="rounded img-fluid"
+                            src={ev.posterImage || DEFAULT_IMG}
+                            alt={ev.name}
+                            className="rounded img-fluid shadow-sm"
+                            style={{ height: 320, width: "100%", objectFit: "cover" }}
                         />
-                        <h6 className="text-center mt-2">{poster.name}</h6>
+                        {/* event name in cloud‑white */}
+                        <h6
+                            className="text-center mt-2"
+                            style={{ color: "var(--cloud)", fontWeight: 500 }}
+                        >
+                            {ev.name}
+                        </h6>
                     </div>
                 ))}
             </Slider>
-        </div>
+        </section>
     );
-};
-
-export default PosterCarousel;
+}

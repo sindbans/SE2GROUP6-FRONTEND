@@ -6,7 +6,7 @@ import { Container } from "react-bootstrap";
 const ParallaxSection = ({ image, children }) => {
     return (
         <Parallax bgImage={image} strength={500}>
-            <div style={{ height: "400px" }}>
+            <div style={{ minHeight: "420px" }}>
                 <Container className="d-flex justify-content-center align-items-center h-100">
                     <div className="text-center text-white">
                         {children}

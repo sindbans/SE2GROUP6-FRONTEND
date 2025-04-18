@@ -17,3 +17,31 @@ body {
     color: gold !important;
     transform: scale(1.08);
 }
+
+/* decorative ticket behind the hero title */
+.hero-ticket-wrap {
+    position: relative;
+    display: inline-block;      /* shrink‑to‑fit so it centers nicely */
+}
+
+/* SVG / PNG graphic */
+.hero-ticket-img {
+    width: clamp(260px, 40vw, 420px);  /* grow on large screens */
+    height: auto;
+}
+
+/* the overlaying H1 */
+.hero-ticket-text {
+    position: absolute;
+    inset: 0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: var(--gold);
+    font-family: "Cinzel", serif;
+    font-weight: 700;
+    font-size: clamp(1.8rem, 5vw, 3rem); /* scales down a bit */
+    text-shadow: 0 0 6px rgba(0, 0, 0, 0.6);
+    pointer-events: none; /* clicks pass through */
+}
+

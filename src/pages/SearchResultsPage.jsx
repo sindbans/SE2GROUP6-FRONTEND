@@ -62,7 +62,7 @@ export default function SearchResultsPage() {
                         >
                             <div className="w-1/3 min-w-[120px]">
                                 <img
-                                    src={event.posterImage || "/assets/images/no-image.png"}
+                                    src={event.posterImage || "/assets/images/no-poster.png"}
                                     alt={event.name}
                                     className="object-cover w-full h-full"
                                 />

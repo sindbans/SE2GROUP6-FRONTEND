@@ -33,8 +33,13 @@ export default function Login() {
             if (!res.ok) {
                 setError(data.message || "Login failed");
             } else {
-                setSuccess("Login successful!");
+
                 // navigate("/home");
+                localStorage.setItem("hp_token", data.token);
+                localStorage.setItem("hp_name", data.name);
+                localStorage.setItem("hp_uid", data.uid);
+                setSuccess("Login successful!");
+                setTimeout(() => navigate("/", {replace : true}), 600 );
             }
         } catch (err) {
             console.error(err);
@@ -171,7 +176,7 @@ export default function Login() {
                         {/* Google Register Button */}
                         <div style={{ textAlign: "center", marginTop: "1.5rem" }}>
                             <a
-                                href="http://localhost:6005/api/auth/google"
+                                href="http://localhost:3000/api/auth/google"
                                 style={{
                                     display: "inline-flex",
                                     alignItems: "center",
