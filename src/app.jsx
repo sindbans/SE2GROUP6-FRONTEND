@@ -8,6 +8,10 @@ import ParallaxTesting from "./pages/playground/ParallaxTesting";
 import Register from "./pages/Register";
 import Login from "./pages/Login";
 import EventPage from "./pages/EventPage";
+import EventsPage from './pages/EventsPage';
+
+// Import the new Layout
+import Layout from "./components/layout/Layout";
 import SearchResultsPage from "./pages/SearchResultsPage";
 
 
@@ -18,9 +22,6 @@ import ConcertSeatSelectionPage from './pages/ConcertSeatSelectionPage';
 import PaymentPage from './pages/PaymentPage';
 import PaymentSuccessPage from './pages/PaymentSuccessPage';
 import PaymentFailurePage from './pages/PaymentFailurePage';
-
-// Import the layout
-import Layout from "./components/layout/Layout";
 
 const App = () => {
     const location = useLocation();
@@ -36,6 +37,9 @@ const App = () => {
                 <Route path="/auth/login" element={<Layout><Login /></Layout>} />
                 <Route path="/search-results" element={<Layout><SearchResultsPage /></Layout>} />
                 <Route path="/event/:eventId" element={<Layout><EventPage /></Layout>} />
+                <Route path="/events" element={<Layout><EventsPage /></Layout>} />
+
+                {/* Add more routes as needed, always wrapped in <Layout> */}
 
 
                 {/* ✅ Your added pages */}
