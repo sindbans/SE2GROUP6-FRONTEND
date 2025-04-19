@@ -1,0 +1,65 @@
+/* src/pages/PaymentPage.css */
+.payment-container {
+  display: flex;
+  padding: 40px;
+  gap: 30px;
+  background: #fafafa;
+  font-family: 'Segoe UI', sans-serif;
+}
+
+.payment-left, .payment-right {
+  background: white;
+  padding: 25px;
+  border-radius: 8px;
+  box-shadow: 0 2px 6px rgba(0,0,0,0.1);
+}
+
+.payment-left {
+  flex: 2;
+}
+
+.payment-right {
+  flex: 1;
+  border-left: 1px solid #eee;
+}
+
+.payment-section {
+  margin-bottom: 20px;
+}
+
+.payment-options label {
+  margin-right: 20px;
+}
+
+.card-info-row {
+  display: flex;
+  gap: 15px;
+}
+
+input {
+  width: 100%;
+  padding: 10px;
+  margin-top: 5px;
+  box-sizing: border-box;
+}
+
+.pay-button {
+  margin-top: 20px;
+  padding: 12px;
+  background-color: #e50914;
+  color: white;
+  border: none;
+  font-size: 16px;
+  width: 100%;
+  cursor: pointer;
+  border-radius: 4px;
+}
+
+.pay-button:hover {
+  background-color: #c40811;
+}
+
+.payment-right .total {
+  margin-top: 20px;
+  font-size: 18px;
+}
