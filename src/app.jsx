@@ -8,6 +8,8 @@ import ParallaxTesting from "./pages/playground/ParallaxTesting"; // adjust path
 import Register from "./pages/Register";
 import Login from "./pages/Login";
 import EventPage from "./pages/EventPage";
+import EventsPage from './pages/EventsPage';
+
 // Import the new Layout
 import Layout from "./components/layout/Layout";
 import SearchResultsPage from "./pages/SearchResultsPage";
@@ -70,6 +72,8 @@ const App = () => {
 
                     {/* existing routes */}
                 <Route path="/event/:eventId" element={<Layout><EventPage /></Layout>} />
+                <Route path="/events" element={<Layout><EventsPage /></Layout>} />
+
                 {/* Add more routes as needed, always wrapped in <Layout> */}
             </Routes>
         </AnimatePresence>

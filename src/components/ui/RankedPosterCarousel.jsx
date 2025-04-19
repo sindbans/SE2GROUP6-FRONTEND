@@ -1,6 +1,6 @@
-// PosterCarousel.jsx
+// components/RankedPosterCarousel.jsx
 import React, { useEffect, useState } from "react";
-import {useNavigate} from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 import Slider from "react-slick";
 import axios from "axios";
 import "slick-carousel/slick/slick.css";
@@ -9,25 +9,33 @@ import "slick-carousel/slick/slick-theme.css";
 const DEFAULT_IMG = "/assets/images/no-poster.png";
 const API = "http://localhost:3000";
 
-export default function PosterCarousel({ eventType, title }) {
+export default function RankedPosterCarousel({ title, strategy, eventType, location }) {
     const [events, setEvents] = useState([]);
     const navigate = useNavigate();
+
     useEffect(() => {
+        const params = new URLSearchParams({
+            strategy,
+            eventType,
+            ...(strategy === "location" && location
+                ? { lat: location.lat, lng: location.lng }
+                : {}),
+        });
+
         axios
-            .get(`${API}/api/events`)
+            .get(`${API}/api/events/ranked?${params.toString()}`)
             .then((res) => {
-                const all = res.data?.events || [];
-                setEvents(all.filter((e) => e.type === eventType));
+                setEvents(res.data?.events || []);
             })
             .catch(() => setEvents([]));
-    }, [eventType]);
+    }, [strategy, eventType, location]);
 
     if (!events.length) return null;
 
     const settings = {
         dots: false,
         infinite: true,
-        speed: 400,
+        speed: 500,
         slidesToShow: 4,
         slidesToScroll: 1,
         autoplay: true,
@@ -40,7 +48,6 @@ export default function PosterCarousel({ eventType, title }) {
 
     return (
         <section className="mb-5">
-            {/* carousel heading in brand cloud‑white */}
             <h3
                 className="mb-3"
                 style={{
@@ -73,7 +80,6 @@ export default function PosterCarousel({ eventType, title }) {
                             {ev.name}
                         </h6>
                     </div>
-
                 ))}
             </Slider>
         </section>
