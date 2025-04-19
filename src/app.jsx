@@ -10,6 +10,8 @@ import Login from "./pages/Login";
 import EventPage from "./pages/EventPage";
 import SearchResultsPage from "./pages/SearchResultsPage";
 
+
+
 // ✅ Import your components
 import SeatSelectionPage from './pages/SeatSelectionPage';
 import ConcertSeatSelectionPage from './pages/ConcertSeatSelectionPage';
@@ -34,6 +36,7 @@ const App = () => {
                 <Route path="/auth/login" element={<Layout><Login /></Layout>} />
                 <Route path="/search-results" element={<Layout><SearchResultsPage /></Layout>} />
                 <Route path="/event/:eventId" element={<Layout><EventPage /></Layout>} />
+
 
                 {/* ✅ Your added pages */}
                 <Route path="/select-seats" element={<Layout><SeatSelectionPage /></Layout>} />

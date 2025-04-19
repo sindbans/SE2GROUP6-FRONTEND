@@ -1,5 +1,9 @@
 import React, { useState } from 'react';
 import { useLocation, useNavigate } from 'react-router-dom';
+import { loadStripe } from '@stripe/stripe-js';
+
+// ✅ Use Vite env variable (restart server after updating .env)
+const stripePromise = loadStripe(import.meta.env.VITE_STRIPE_PUBLISHABLE_KEY);
 
 const PaymentPage = () => {
   const location = useLocation();
@@ -8,11 +12,9 @@ const PaymentPage = () => {
   const [email, setEmail] = useState('');
 
   const rowPrices = (row) =>
-    ['A', 'B'].includes(row)
-      ? 150
-      : ['C', 'D', 'E', 'F'].includes(row)
-      ? 250
-      : 200;
+    ['A', 'B', 'C'].includes(row) ? 500
+    : ['D', 'E', 'F'].includes(row) ? 350
+    : 200;
 
   const handleSubmit = async (e) => {
     e.preventDefault();
@@ -21,14 +23,14 @@ const PaymentPage = () => {
       customerEmail: email,
       items: selectedSeats.map((seat) => ({
         name: `${title} - Seat ${seat}`,
-        amount: rowPrices(seat.charAt(0)) * 100, // ✅ Send as cents
+        amount: rowPrices(seat.charAt(0)) * 100,
         quantity: 1,
         currency: 'usd',
       })),
     };
 
     try {
-      const response = await fetch('http://localhost:3000/api/payment/checkout', {
+      const response = await fetch('http://localhost:3000/api/payments/checkout', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify(payload),
@@ -37,7 +39,7 @@ const PaymentPage = () => {
       const data = await response.json();
 
       if (data.sessionId) {
-        const stripe = window.Stripe(process.env.REACT_APP_STRIPE_PUBLISHABLE_KEY);
+        const stripe = await stripePromise;
         const { error } = await stripe.redirectToCheckout({ sessionId: data.sessionId });
         if (error) {
           console.error('Stripe redirect error:', error.message);
@@ -53,11 +55,7 @@ const PaymentPage = () => {
   };
 
   if (!title || !selectedSeats) {
-    return (
-      <div style={{ padding: '40px', textAlign: 'center' }}>
-        Missing booking information. Please select seats again.
-      </div>
-    );
+    return <div style={{ padding: '40px', textAlign: 'center' }}>Missing booking information. Please select seats again.</div>;
   }
 
   const totalAmountCents = selectedSeats.reduce(

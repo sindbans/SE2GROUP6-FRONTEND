@@ -11,7 +11,7 @@ const PaymentSuccessPage = () => {
   useEffect(() => {
     const fetchSession = async () => {
       try {
-        const res = await fetch(`http://localhost:3000/api/payment/session/${sessionId}`);
+        const res = await fetch(`http://localhost:3000/api/payments/session/${sessionId}`);
         const data = await res.json();
         setSessionDetails(data);
         setLoading(false);
