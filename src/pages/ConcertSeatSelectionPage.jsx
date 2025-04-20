@@ -1,6 +1,6 @@
 // src/pages/ConcertSeatSelectionPage.jsx
 import React, { useState } from 'react';
-import './ConcertSeatSelectionPage.css';
+import '../styles/ConcertSeatSelectionPage.css';
 import { useLocation, useNavigate } from 'react-router-dom';
 
 const ConcertSeatSelectionPage = () => {

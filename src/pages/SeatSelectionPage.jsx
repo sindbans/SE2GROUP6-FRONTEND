@@ -1,6 +1,6 @@
 // src/pages/SeatSelectionPage.js
 import React, { useState } from 'react';
-import './SeatSelectionPage.css';
+import '../styles/SeatSelectionPage.css';
 import { useLocation, useNavigate } from 'react-router-dom';
 
 const SeatSelectionPage = () => {
