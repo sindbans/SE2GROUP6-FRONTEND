@@ -1,7 +1,7 @@
 // src/pages/PaymentFailurePage.js
 import React from 'react';
 import { Link } from 'react-router-dom';
-import './PaymentStatusPage.css';
+import '../styles/PaymentStatusPage.css';
 
 const PaymentFailurePage = () => {
   return (

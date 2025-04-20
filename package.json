@@ -23,7 +23,7 @@
   "devDependencies": {
     "@types/react": "^18.3.20",
     "@types/react-dom": "^18.3.6",
-    "vite": "^6.2.5"
+    "vite": "^6.3.2"
   },
   "scripts": {
     "dev": "vite",

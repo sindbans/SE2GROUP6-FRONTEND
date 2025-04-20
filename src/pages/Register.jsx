@@ -291,7 +291,7 @@ export default function Register() {
                     {/* Google Register Button */}
                     <div style={{ textAlign: "center", marginTop: "1.5rem" }}>
                         <a
-                            href="http://localhost:6005/api/auth/google"
+                            href="http://localhost:3000/api/auth/google"
                             style={{
                                 display: "inline-flex",
                                 alignItems: "center",
