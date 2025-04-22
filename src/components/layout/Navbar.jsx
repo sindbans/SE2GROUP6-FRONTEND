@@ -1,16 +1,20 @@
 // src/components/layout/Navbar.jsx
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useState, useRef } from "react";
 import axios from "axios";
 import {
     Navbar as RBNavbar,
     Nav,
     Container,
     Collapse,
+    Modal,
+    Button,
+    Form,
+    ListGroup,
 } from "react-bootstrap";
 import SearchBarWithDropdown from "@components/common/SearchBarWithDropDown";
 
 export default function Navbar() {
-    /* ---------- location logic ... unchanged ---------- */
+    // —————— location state ——————
     const [location, setLocation] = useState(
         localStorage.getItem("userLocationName") || ""
     );
@@ -18,16 +22,16 @@ export default function Navbar() {
     const [manualInput, setManualInput] = useState("");
     const [suggestions, setSuggestions] = useState([]);
 
-    /* ---------- auth state ---------- */
+    // —————— auth state ——————
     const [userName, setUserName] = useState(
         localStorage.getItem("hp_name") || null
     );
 
-    /* ---------- NEW: search‑bar toggle ---------- */
+    // —————— search‑bar toggle ——————
     const [showSearch, setShowSearch] = useState(false);
     const toggleSearch = () => setShowSearch((prev) => !prev);
 
-    /* ---------- side‑effects unchanged ---------- */
+    // —————— pull name from URL or storage changes ——————
     useEffect(() => {
         const params = new URLSearchParams(window.location.search);
         const nameFromURL = params.get("name");
@@ -41,29 +45,51 @@ export default function Navbar() {
         return () => window.removeEventListener("storage", handleStorage);
     }, []);
 
-    /* ---------- city autocomplete debounce (unchanged) ---------- */
+    // —————— debounce input → suggestions ——————
+    const debounceTimer = useRef(null);
+
     useEffect(() => {
-        if (manualInput.length < 3) return setSuggestions([]);
-        const t = setTimeout(async () => {
-            try {
-                const res = await axios.get(
-                    "https://nominatim.openstreetmap.org/search",
-                    {
-                        params: {
-                            q: manualInput,
-                            format: "json",
-                            addressdetails: 1,
-                            limit: 5,
-                        },
-                    }
-                );
-                setSuggestions(res.data);
-            } catch {
-                setSuggestions([]);
-            }
-        }, 300);
-        return () => clearTimeout(t);
+        if (debounceTimer.current) clearTimeout(debounceTimer.current);
+
+        if (manualInput.length < 3) {
+            setSuggestions([]);
+            return;
+        }
+
+        debounceTimer.current = setTimeout(() => {
+            fetchSuggestions(manualInput);
+        }, 500);
+
+        return () => clearTimeout(debounceTimer.current);
     }, [manualInput]);
+
+    const fetchSuggestions = async (q) => {
+        try {
+            const res = await axios.get(
+                "https://nominatim.openstreetmap.org/search",
+                {
+                    params: { q, format: "json", limit: 5 },
+                }
+            );
+            setSuggestions(res.data);
+        } catch {
+            setSuggestions([]);
+        }
+    };
+
+    const handleInputChange = (e) => {
+        setManualInput(e.target.value);
+    };
+
+    const handleSelect = (place) => {
+        localStorage.setItem(
+            "userLocationCoords",
+            `${place.lat},${place.lon}`
+        );
+        localStorage.setItem("userLocationName", place.display_name);
+        setLocation(place.display_name);
+        setShowModal(false);
+    };
 
     return (
         <>
@@ -80,17 +106,13 @@ export default function Navbar() {
                         HermesPass
                     </RBNavbar.Brand>
 
-
                     <RBNavbar.Collapse id="hp-nav">
                         <Nav className="me-auto">
                             <Nav.Link href="/">Home</Nav.Link>
                             <Nav.Link href="/events">Events</Nav.Link>
-                            <Nav.Link href="#">About</Nav.Link>
-                            <Nav.Link href="#">Contact</Nav.Link>
                         </Nav>
 
                         <div className="d-flex align-items-center">
-                            {/* search toggle (hidden on collapse toggle) */}
                             <button
                                 onClick={toggleSearch}
                                 className="btn p-0 border-0 bg-transparent me-3"
@@ -103,20 +125,14 @@ export default function Navbar() {
                                     height="20"
                                 />
                             </button>
-
                             <RBNavbar.Toggle aria-controls="hp-nav" />
                         </div>
-
 
                         {/* location display */}
                         <span
                             className="nav-animated-text me-4"
                             style={{ cursor: "pointer" }}
-                            onClick={() => {
-                                setShowModal(true);
-                                setManualInput("");
-                                setSuggestions([]);
-                            }}
+                            onClick={() => setShowModal(true)}
                         >
               📍 {location || "Detecting…"}
             </span>
@@ -126,10 +142,16 @@ export default function Navbar() {
                             <span className="nav-animated-text">Hi, {userName}</span>
                         ) : (
                             <>
-                                <Nav.Link href="/auth/login" className="nav-animated-text me-3">
+                                <Nav.Link
+                                    href="/auth/login"
+                                    className="nav-animated-text me-3"
+                                >
                                     Login
                                 </Nav.Link>
-                                <Nav.Link href="/auth/register" className="nav-animated-text">
+                                <Nav.Link
+                                    href="/auth/register"
+                                    className="nav-animated-text"
+                                >
                                     Signup
                                 </Nav.Link>
                             </>
@@ -147,11 +169,46 @@ export default function Navbar() {
                 </div>
             </Collapse>
 
-            {/* location modal (unchanged) */}
-            {showModal && (
-                /* … existing modal code … */
-                <></>
-            )}
+            {/* in‑Navbar location modal */}
+            <Modal
+                show={showModal}
+                onHide={() => setShowModal(false)}
+                centered
+            >
+                <Modal.Header closeButton>
+                    <Modal.Title>Enter Your City</Modal.Title>
+                </Modal.Header>
+                <Modal.Body>
+                    <Form.Control
+                        type="text"
+                        placeholder="Search city…"
+                        value={manualInput}
+                        onChange={handleInputChange}
+                    />
+                    <ListGroup
+                        className="mt-2"
+                        style={{ maxHeight: "200px", overflowY: "auto" }}
+                    >
+                        {suggestions.map((s, i) => (
+                            <ListGroup.Item
+                                action
+                                key={i}
+                                onClick={() => handleSelect(s)}
+                            >
+                                {s.display_name}
+                            </ListGroup.Item>
+                        ))}
+                    </ListGroup>
+                </Modal.Body>
+                <Modal.Footer>
+                    <Button
+                        variant="secondary"
+                        onClick={() => setShowModal(false)}
+                    >
+                        Cancel
+                    </Button>
+                </Modal.Footer>
+            </Modal>
         </>
     );
 }

@@ -30,26 +30,23 @@ export default function Home() {
                     <TextTyper text="Now Showing on the Big Screen" className="fs-4 mb-3" />
                     <PosterCarousel eventType="MovieSchema" title="Now Showing — Movies" />
                 </Container>
-            </ParallaxSection>
 
             {/* CONCERTS */}
-            <ParallaxSection image="/assets/images/Events3.png">
                 <Container className="text-white text-center py-5">
                     <TextTyper text="Turn up the volume!" className="fs-4 mb-3" />
                     <PosterCarousel eventType="ConcertSchema" title="Upcoming Concerts" />
                 </Container>
-            </ParallaxSection>
+
 
             {/* THEATRE */}
-            <ParallaxSection image="/assets/images/Events4.png">
+
                 <Container className="text-white text-center py-5">
                     <TextTyper text="Experience the drama unfold" className="fs-4 mb-3" />
                     <PosterCarousel eventType="TheatreSchema" title="Live Theatre" />
                 </Container>
-            </ParallaxSection>
 
             {/* OTHER EVENTS */}
-            <ParallaxSection image="/assets/images/Events5.png">
+
                 <Container className="text-white text-center py-5">
                     <TextTyper text="Expos, Sports, and Everything Else" className="fs-4 mb-3" />
                     <PosterCarousel eventType="OtherEventSchema" title="Other Exciting Events" />
