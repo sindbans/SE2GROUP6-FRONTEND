@@ -22,6 +22,8 @@ import ConcertSeatSelectionPage from './pages/ConcertSeatSelectionPage';
 import PaymentPage from './pages/PaymentPage';
 import PaymentSuccessPage from './pages/PaymentSuccessPage';
 import PaymentFailurePage from './pages/PaymentFailurePage';
+import ResetRequest from "./pages/ResetRequest";
+import ResetConfirm from "./pages/ResetConfirm";
 
 const App = () => {
     const location = useLocation();
@@ -40,7 +42,8 @@ const App = () => {
                 <Route path="/events" element={<Layout><EventsPage /></Layout>} />
 
                 {/* Add more routes as needed, always wrapped in <Layout> */}
-
+                {/* <Route path="/auth/reset" element={<Layout><ResetRequest /></Layout>} />
+                <Route path="/reset" element={<Layout><ResetConfirm /></Layout>} /> */}
 
                 {/* ✅ Your added pages */}
                 <Route path="/select-seats" element={<Layout><SeatSelectionPage /></Layout>} />

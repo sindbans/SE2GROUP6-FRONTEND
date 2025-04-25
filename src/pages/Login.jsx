@@ -3,7 +3,16 @@ import React, { useState } from "react";
 import { Parallax } from "react-parallax";
 import { useNavigate, Link } from "react-router-dom";
 import { motion } from "framer-motion";
-
+import {
+    Navbar as RBNavbar,
+    Nav,
+    Container,
+    Collapse,
+    Modal,
+    Button,
+    Form,
+    ListGroup,
+} from "react-bootstrap";
 export default function Login() {
     const navigate = useNavigate();
     const [email, setEmail] = useState("");
@@ -208,14 +217,23 @@ export default function Login() {
                                 Register with Google
                             </a>
                         </div>
+                        {/* <div className="text-center mt-3">
+  <p style={{ fontSize: "0.85rem" }}>
+    Forgot your password?{" "}
+    <Link to="/auth/reset" style={{ color: "var(--gold)" }}>
+      Reset it here
+    </Link>
+  </p>
+</div> */}
 
                         {/* Register Redirect */}
                         <div className="text-center mt-3">
                             <p style={{ fontSize: "0.85rem" }}>
                                 Don’t have an account?{" "}
-                                <Link to="/register" className="text-gold" style={{ color: "var(--gold)" }}>
-                                    Register
-                                </Link>
+                                
+                                 <Nav.Link href="/auth/register" className="text-gold" style={{ color: "var(--gold)"}}>
+                                      Signup
+                                    </Nav.Link>
                             </p>
                         </div>
                     </form>

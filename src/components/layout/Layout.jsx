@@ -2,7 +2,7 @@
 import React from "react";
 import Navbar from "./Navbar";
 import Footer from "./Footer";
-
+import GoogleAd from "./GoogleAd";
 /**
  * Global Layout that:
  * 1) Displays a Navbar at the top of every page
@@ -19,7 +19,13 @@ const Layout = ({ children }) => {
             <main className="flex-grow-1">
                 {children}
             </main>
-
+  {/*  Google Ad Block */}
+  <div className="my-3 d-flex justify-content-center">
+  <div style={{ width: "100%", maxWidth: 728 }}>
+    <GoogleAd />
+  </div>
+</div>
+        
             {/* Footer pinned to bottom if content is short */}
             <Footer />
         </div>

@@ -1,27 +1,30 @@
-// src/components/layout/GoogleAd.jsx
-import { useEffect } from "react";
+import { useEffect, useRef } from "react";
 
-const GoogleAd = ({ slot }) => {
-    useEffect(() => {
-        if (window.adsbygoogle) {
-            try {
-                (window.adsbygoogle = window.adsbygoogle || []).push({});
-            } catch (e) {
-                console.error("Adsense error:", e);
-            }
-        }
-    }, []);
+const GoogleAd = () => {
+  const adRef = useRef(null);
 
-    return (
-        <ins
-            className="adsbygoogle"
-            style={{ display: "block" }}
-            data-ad-client="ca-pub-XXXXXXXXXXXXXXXX"
-            data-ad-slot={slot}
-            data-ad-format="auto"
-            data-full-width-responsive="true"
-        ></ins>
-    );
+  useEffect(() => {
+    if (adRef.current && !adRef.current.hasAttribute("data-loaded")) {
+      try {
+        (window.adsbygoogle = window.adsbygoogle || []).push({});
+        adRef.current.setAttribute("data-loaded", "true");
+      } catch (e) {
+        console.error("Adsense error:", e);
+      }
+    }
+  }, []);
+
+  return (
+    <ins
+      ref={adRef}
+      className="adsbygoogle"
+      style={{ display: "block" }}
+      data-ad-client="ca-pub-3185979883345935"
+      data-ad-slot="8354716284"
+      data-ad-format="auto"
+      data-full-width-responsive="true"
+    ></ins>
+  );
 };
 
 export default GoogleAd;
